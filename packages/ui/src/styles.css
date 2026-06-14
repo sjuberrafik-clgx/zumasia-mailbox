@@ -405,7 +405,7 @@ summary:focus-visible {
     display: none;
 }
 
-.zm-header__menu[open] > .zm-header__toggle {
+.zm-header__menu[open]>.zm-header__toggle {
     border-color: rgba(117, 230, 189, 0.38);
     background: rgba(117, 230, 189, 0.09);
 }
@@ -429,7 +429,7 @@ summary:focus-visible {
     padding: 14px;
 }
 
-.zm-header__mobile-section + .zm-header__mobile-section {
+.zm-header__mobile-section+.zm-header__mobile-section {
     margin-top: var(--zm-space-md);
     padding-top: var(--zm-space-md);
     border-top: 1px solid rgba(58, 70, 85, 0.62);
@@ -782,6 +782,7 @@ summary:focus-visible {
 }
 
 @media (max-width: 700px) {
+
     .zm-header__inner,
     .zm-container,
     .zm-footer__top,

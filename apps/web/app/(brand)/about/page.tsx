@@ -5,12 +5,13 @@ export default function AboutPage() {
     <div className="zm-container">
       <h1>About Zumasia</h1>
       <p>
-        Zumasia is a family of tiny, useful, no-account web tools — built to be free, fast, and
-        disposable. Think of it as a Swiss-army knife of web utilities.
+        Zumasia builds no-account tools for email workflow testing, QA checks, and fast developer
+        verification flows.
       </p>
       <p>
-        Today: <a href="/mail">Mail</a> — public temp inboxes for testing and throwaway signups.
-        Coming soon: Clipboard (paste-bin with short links), Notes, and more.
+        Today: <a href="/mail">Mail</a> — public temp inboxes for signup flows, transactional email
+        checks, and throwaway developer testing. Coming soon: Clipboard (paste-bin with short links),
+        Notes, and more.
       </p>
       <p>
         Questions or abuse reports? Email <a href="mailto:hello@zumasia.com">hello@zumasia.com</a>{' '}

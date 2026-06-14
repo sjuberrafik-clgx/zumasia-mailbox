@@ -12,14 +12,14 @@ export const products: readonly Product[] = [
   {
     slug: 'mail',
     name: 'Mail',
-    tagline: 'Public temp inboxes at *@zumasia.com — instant, no signup.',
+    tagline: 'Public temp inboxes for email workflow testing, QA verification, and developer signups.',
     status: 'live',
     url: '/mail',
   },
   {
     slug: 'clipboard',
     name: 'Clipboard',
-    tagline: 'Share text and snippets via short links. Auto-expires.',
+    tagline: 'Share text and snippets through short links with automatic expiry.',
     status: 'soon',
     url: 'https://clip.zumasia.com',
   },

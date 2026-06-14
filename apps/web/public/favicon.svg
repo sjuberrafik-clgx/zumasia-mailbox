@@ -1,0 +1,13 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#23254A"/>
+  <defs>
+    <linearGradient id="zumasia-favicon-gradient" x1="12" y1="14" x2="50" y2="47" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ED4FF"/>
+      <stop offset="1" stop-color="#2788E8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="27" cy="31" r="15" stroke="url(#zumasia-favicon-gradient)" stroke-width="6"/>
+  <path d="M37 40L50 47L43 34" stroke="url(#zumasia-favicon-gradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="27" cy="31" r="8" stroke="#1F4D92" stroke-width="4.8"/>
+  <circle cx="27" cy="31" r="4.2" fill="#1F4D92"/>
+</svg>

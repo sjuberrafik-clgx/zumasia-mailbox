@@ -1,5 +1,5 @@
 export const BRAND_NAME = 'Zumasia';
-export const BRAND_TAGLINE = 'Useful tiny tools — no account needed.';
+export const BRAND_TAGLINE = 'Practical no-account tools for email workflow testing, QA checks, and developer workflows.';
 export const MAIL_DOMAIN = 'zumasia.com';
 export const MAIL_PRODUCT_NAME = 'Mail';
 export const RETENTION_HOURS = 24;

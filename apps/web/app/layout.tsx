@@ -9,16 +9,22 @@ export const metadata: Metadata = {
     default: 'Zumasia — useful tiny tools',
     template: '%s · Zumasia',
   },
-  description: 'Zumasia is a family of tiny, useful, no-account web tools. Start with Mail.',
+  description:
+    'Zumasia builds no-account tools for email workflow testing, starting with public temp mail for QA teams and developers.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
+      <body className="zm-app">
         <ZumasiaHeader />
-        <main>{children}</main>
+        <main className="zm-main">{children}</main>
         <ZumasiaFooter />
       </body>
     </html>

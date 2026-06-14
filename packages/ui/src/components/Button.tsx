@@ -1,12 +1,13 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonProps = {
-  variant?: 'default' | 'primary';
+  variant?: 'default' | 'primary' | 'ghost' | 'danger';
   children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({ variant = 'default', children, className, ...rest }: ButtonProps) {
-  const cls = ['zm-button', variant === 'primary' ? 'zm-button--primary' : '', className]
+  const variantClass = variant === 'default' ? '' : `zm-button--${variant}`;
+  const cls = ['zm-button', variantClass, className]
     .filter(Boolean)
     .join(' ');
   return (

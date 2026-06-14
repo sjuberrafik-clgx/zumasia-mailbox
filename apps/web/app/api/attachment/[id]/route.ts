@@ -3,8 +3,6 @@ import { BLOCKED_ATTACHMENT_EXTENSIONS } from '@zumasia/shared/brand';
 import { bindings, getClientIp } from '@/lib/cf';
 import { rateLimit } from '@/lib/ratelimit';
 
-export const runtime = 'edge';
-
 type Params = { id: string };
 
 type AttachmentRow = {

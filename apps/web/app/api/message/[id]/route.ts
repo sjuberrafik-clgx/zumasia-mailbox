@@ -3,8 +3,6 @@ import type { AttachmentMeta, MessageDetail } from '@zumasia/shared/schemas';
 import { bindings, getClientIp } from '@/lib/cf';
 import { rateLimit } from '@/lib/ratelimit';
 
-export const runtime = 'edge';
-
 type Params = { id: string };
 
 type MessageRow = {

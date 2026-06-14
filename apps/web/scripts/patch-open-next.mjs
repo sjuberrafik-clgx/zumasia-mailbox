@@ -55,14 +55,14 @@ if (handler.includes(CHUNK_STUB)) {
     const ssrChunkDir = resolve(serverFnRoot, '.next/server/chunks/ssr');
     const chunkFiles = readdirSync(ssrChunkDir).filter(f => f.endsWith('.js') && f !== '[turbopack]_runtime.js');
 
-    // Each chunk file is already a CommonJS module in the bundle under the
-    // full .open-next/... key.  We need to map the short "server/chunks/ssr/<name>"
-    // paths (which R.c() passes) to require() calls using the bundled module key.
+    // handler.mjs lives at .open-next/server-functions/default/apps/web/handler.mjs
+    // Chunk files live at .open-next/server-functions/default/apps/web/.next/server/chunks/ssr/<name>
+    // So the relative require path from handler.mjs is ./.next/server/chunks/ssr/<name>
+    // Wrangler can statically resolve these and bundle them.
     const cases = chunkFiles.map(name => {
         const shortPath = `server/chunks/ssr/${name}`;
-        // The bundle key OpenNext uses:
-        const bundleKey = `.open-next/server-functions/default/apps/web/.next/server/chunks/ssr/${name}`;
-        return `case ${JSON.stringify(shortPath)}: return require(${JSON.stringify(bundleKey)});`;
+        const requirePath = `./.next/server/chunks/ssr/${name}`;
+        return `case ${JSON.stringify(shortPath)}: return require(${JSON.stringify(requirePath)});`;
     }).join('');
 
     const CHUNK_REPLACEMENT =

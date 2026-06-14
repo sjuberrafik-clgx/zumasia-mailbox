@@ -1,24 +1,24 @@
 {
-    "name": "@zumasia/shared",
-    "version": "0.1.0",
-    "private": true,
-    "type": "module",
-    "exports": {
-        ".": "./src/index.ts",
-        "./address": "./src/address.ts",
-        "./schemas": "./src/schemas.ts",
-        "./sanitize": "./src/sanitize.ts",
-        "./brand": "./src/brand.ts"
-    },
-    "scripts": {
-        "typecheck": "tsc --noEmit"
-    },
-    "dependencies": {
-        "sanitize-html": "^2.17.5",
-        "zod": "^4.4.3"
-    },
-    "devDependencies": {
-        "@types/sanitize-html": "^2.16.1",
-        "typescript": "^6.0.3"
-    }
+  "name": "@zumasia/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./address": "./src/address.ts",
+    "./schemas": "./src/schemas.ts",
+    "./sanitize": "./src/sanitize.ts",
+    "./brand": "./src/brand.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "sanitize-html": "^2.17.5",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.16.1",
+    "typescript": "^6.0.3"
+  }
 }

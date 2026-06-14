@@ -1,38 +1,21 @@
 {
-    "extends": "../../tsconfig.base.json",
-    "compilerOptions": {
-        "noEmit": true,
-        "jsx": "preserve",
-        "lib": [
-            "ES2023",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "allowJs": true,
-        "incremental": true,
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ],
-        "paths": {
-            "@/*": [
-                "./*"
-            ]
-        },
-        "types": [
-            "@cloudflare/workers-types"
-        ]
-    },
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx",
-        ".next/types/**/*.ts"
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "preserve",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
     ],
-    "exclude": [
-        "node_modules",
-        ".next",
-        ".open-next"
-    ]
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next", ".open-next"]
 }

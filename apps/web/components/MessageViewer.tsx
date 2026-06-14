@@ -1,12 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { MessageDetail } from '@zumasia/shared/schemas';
 
 type Tab = 'html' | 'text' | 'headers' | 'attachments';
 
 export function MessageViewer({ detail }: { detail: MessageDetail | null }) {
   const [tab, setTab] = useState<Tab>('html');
+  const [showImages, setShowImages] = useState(false);
+
+  const blockedImages = useMemo(
+    () => (detail?.htmlBody ? countBlockedImages(detail.htmlBody) : 0),
+    [detail?.htmlBody],
+  );
+
+  const srcDoc = useMemo(
+    () => (detail?.htmlBody ? buildEmailDocument(detail.htmlBody, showImages) : ''),
+    [detail?.htmlBody, showImages],
+  );
 
   if (!detail) {
     return (
@@ -82,13 +93,33 @@ export function MessageViewer({ detail }: { detail: MessageDetail | null }) {
 
       <div className="viewer__content">
         {activeTab === 'html' && detail.htmlBody ? (
-          <iframe
-            className="viewer__frame"
-            sandbox="allow-popups allow-popups-to-escape-sandbox"
-            srcDoc={detail.htmlBody}
-            referrerPolicy="no-referrer"
-            title="Message HTML"
-          />
+          <>
+            {blockedImages > 0 ? (
+              <div className="viewer__images-bar">
+                <span className="viewer__images-text">
+                  {showImages
+                    ? 'Remote images are shown. They may load tracking content from the sender.'
+                    : `${blockedImages} remote image${blockedImages > 1 ? 's' : ''} blocked to protect your privacy.`}
+                </span>
+                <button
+                  type="button"
+                  className="viewer__images-btn"
+                  onClick={() => setShowImages((v) => !v)}
+                >
+                  {showImages ? 'Hide images' : 'Show images'}
+                </button>
+              </div>
+            ) : null}
+            <iframe
+              key={showImages ? 'imgs-on' : 'imgs-off'}
+              className="viewer__frame"
+              sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+              srcDoc={srcDoc}
+              referrerPolicy="no-referrer"
+              title="Message HTML"
+              onLoad={autoSizeFrame}
+            />
+          </>
         ) : null}
 
         {activeTab === 'text' ? (
@@ -125,6 +156,72 @@ export function MessageViewer({ detail }: { detail: MessageDetail | null }) {
       </div>
     </article>
   );
+}
+
+function autoSizeFrame(e: React.SyntheticEvent<HTMLIFrameElement>) {
+  const frame = e.currentTarget;
+  try {
+    const doc = frame.contentDocument;
+    if (!doc?.body) return;
+    const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+    if (height > 0) frame.style.height = `${height + 32}px`;
+  } catch {
+    /* cross-origin or unavailable — keep the default height */
+  }
+}
+
+function countBlockedImages(html: string): number {
+  const matches = html.match(/data-original-src="/gi);
+  return matches ? matches.length : 0;
+}
+
+function restoreRemoteImages(html: string): string {
+  return html.replace(/<img\b[^>]*>/gi, (tag) => {
+    const m = /data-original-src="([^"]*)"/i.exec(tag);
+    if (!m) return tag;
+    const original = m[1];
+    if (/\ssrc="[^"]*"/i.test(tag)) {
+      return tag.replace(/\ssrc="[^"]*"/i, ` src="${original}"`);
+    }
+    return tag.replace(/<img\b/i, `<img src="${original}"`);
+  });
+}
+
+function buildEmailDocument(html: string, showImages: boolean): string {
+  const body = showImages ? restoreRemoteImages(html) : html;
+  return `<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<base target="_blank" />
+<style>
+  html, body {
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    color: #1f2328;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+    -webkit-text-size-adjust: 100%;
+  }
+  img { max-width: 100%; height: auto; border: 0; }
+  a { color: #0a66c2; }
+  table { max-width: 100%; }
+  blockquote {
+    margin: 0 0 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid #d0d7de;
+    color: #57606a;
+  }
+  ::-webkit-scrollbar { height: 8px; width: 8px; }
+  ::-webkit-scrollbar-thumb { background: #d0d7de; border-radius: 4px; }
+</style>
+</head>
+<body>${body}</body>
+</html>`;
 }
 
 function formatBytes(n: number): string {

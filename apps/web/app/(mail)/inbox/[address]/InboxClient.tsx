@@ -79,14 +79,22 @@ export function InboxClient({ localPart, fullAddress }: Props) {
 
   return (
     <div className="zm-container">
-      <h1 style={{ margin: 0, fontSize: 24 }}>{fullAddress}</h1>
-      <p className="refresh-status" data-paused={paused ? 'true' : 'false'}>
-        {paused
-          ? 'Paused — tab is in background'
-          : lastUpdated
-            ? `Live · checking every ${intervalMs / 1000}s`
-            : 'Connecting…'}
-      </p>
+      <div className="inbox-header">
+        <div className="inbox-header__titles">
+          <h1 className="inbox-header__address">{fullAddress}</h1>
+          <p className="refresh-status" data-paused={paused ? 'true' : 'false'}>
+            {paused
+              ? 'Paused — tab is in background'
+              : lastUpdated
+                ? `Live · checking every ${intervalMs / 1000}s`
+                : 'Connecting…'}
+          </p>
+        </div>
+        <span className="inbox-header__count">
+          {messages === null ? '—' : messages.length}{' '}
+          {messages?.length === 1 ? 'message' : 'messages'}
+        </span>
+      </div>
 
       <WarningBanner title="Public inbox">
         Anyone with this address can read these messages. Do not use for sensitive mail.

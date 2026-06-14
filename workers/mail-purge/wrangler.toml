@@ -1,0 +1,15 @@
+name = "zumasia-mail-purge"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "zumasia-mail"
+database_id = "12749b24-b21d-4f5d-bbca-89321113db93"
+
+[[r2_buckets]]
+binding = "EML_BUCKET"
+bucket_name = "zumasia-mail-eml"

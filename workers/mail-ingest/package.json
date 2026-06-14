@@ -1,0 +1,26 @@
+{
+    "name": "@zumasia/mail-ingest",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@zumasia/shared": "workspace:*",
+        "postal-mime": "^2.7.4",
+        "sanitize-html": "^2.17.5",
+        "uuid": "^14.0.0"
+    },
+    "devDependencies": {
+        "@cloudflare/vitest-pool-workers": "^0.16.15",
+        "@cloudflare/workers-types": "^4.20260613.1",
+        "@types/sanitize-html": "^2.16.1",
+        "typescript": "^6.0.3",
+        "vitest": "^4.1.8",
+        "wrangler": "^4.100.0"
+    }
+}

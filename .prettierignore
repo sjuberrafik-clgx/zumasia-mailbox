@@ -1,0 +1,12 @@
+node_modules
+dist
+.next
+.open-next
+.wrangler
+.vercel
+out
+build
+coverage
+pnpm-lock.yaml
+*.sql
+next-env.d.ts

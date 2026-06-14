@@ -1,0 +1,208 @@
+:root {
+    --zm-bg: #0b0d10;
+    --zm-bg-subtle: #121519;
+    --zm-surface: #1a1f25;
+    --zm-border: #2a3038;
+    --zm-text: #e8edf2;
+    --zm-text-muted: #9aa5b1;
+    --zm-accent: #6ee7b7;
+    --zm-accent-dark: #10b981;
+    --zm-danger: #ef4444;
+    --zm-warning: #f59e0b;
+    --zm-radius-sm: 4px;
+    --zm-radius-md: 8px;
+    --zm-radius-lg: 12px;
+    --zm-space-xs: 4px;
+    --zm-space-sm: 8px;
+    --zm-space-md: 16px;
+    --zm-space-lg: 24px;
+    --zm-space-xl: 40px;
+    --zm-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --zm-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--zm-bg);
+    color: var(--zm-text);
+    font-family: var(--zm-font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color: var(--zm-accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.zm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--zm-space-md) var(--zm-space-lg);
+    border-bottom: 1px solid var(--zm-border);
+    background: var(--zm-bg-subtle);
+}
+
+.zm-header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--zm-space-sm);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--zm-text);
+}
+
+.zm-header__brand:hover {
+    text-decoration: none;
+}
+
+.zm-header__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--zm-space-lg);
+}
+
+.zm-header__nav a {
+    color: var(--zm-text-muted);
+    font-size: 14px;
+}
+
+.zm-header__nav a:hover {
+    color: var(--zm-text);
+    text-decoration: none;
+}
+
+.zm-footer {
+    margin-top: var(--zm-space-xl);
+    padding: var(--zm-space-lg);
+    border-top: 1px solid var(--zm-border);
+    color: var(--zm-text-muted);
+    font-size: 13px;
+}
+
+.zm-footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--zm-space-md);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.zm-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--zm-space-md);
+}
+
+.zm-footer__links a {
+    color: var(--zm-text-muted);
+}
+
+.zm-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--zm-space-sm) var(--zm-space-md);
+    border-radius: var(--zm-radius-md);
+    border: 1px solid var(--zm-border);
+    background: var(--zm-surface);
+    color: var(--zm-text);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background 120ms ease,
+        border-color 120ms ease;
+}
+
+.zm-button:hover {
+    background: var(--zm-border);
+}
+
+.zm-button--primary {
+    background: var(--zm-accent);
+    border-color: var(--zm-accent);
+    color: #0b0d10;
+}
+
+.zm-button--primary:hover {
+    background: var(--zm-accent-dark);
+    border-color: var(--zm-accent-dark);
+    text-decoration: none;
+}
+
+.zm-card {
+    background: var(--zm-surface);
+    border: 1px solid var(--zm-border);
+    border-radius: var(--zm-radius-lg);
+    padding: var(--zm-space-lg);
+}
+
+.zm-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    border: 1px solid var(--zm-border);
+}
+
+.zm-badge--live {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: var(--zm-accent-dark);
+    color: var(--zm-accent);
+}
+
+.zm-badge--soon {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--zm-warning);
+    color: var(--zm-warning);
+}
+
+.zm-badge--planned {
+    background: rgba(154, 165, 177, 0.1);
+    color: var(--zm-text-muted);
+}
+
+.zm-warning {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid var(--zm-warning);
+    border-radius: var(--zm-radius-md);
+    padding: var(--zm-space-md);
+    color: var(--zm-text);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.zm-warning strong {
+    color: var(--zm-warning);
+}
+
+.zm-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--zm-space-lg);
+}
+
+.zm-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--zm-space-md);
+}

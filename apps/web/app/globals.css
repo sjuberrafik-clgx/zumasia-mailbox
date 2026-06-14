@@ -1,0 +1,197 @@
+@import '@zumasia/ui/styles.css';
+
+main {
+    min-height: calc(100vh - 200px);
+}
+
+.hero {
+    text-align: center;
+    padding: var(--zm-space-xl) var(--zm-space-md);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    margin: 0 0 var(--zm-space-md);
+    letter-spacing: -0.02em;
+}
+
+.hero p {
+    font-size: 18px;
+    color: var(--zm-text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--zm-space-md);
+    margin-top: var(--zm-space-xl);
+}
+
+.product-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--zm-space-sm);
+}
+
+.product-card h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.product-card p {
+    color: var(--zm-text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: var(--zm-space-sm) 0 var(--zm-space-md);
+}
+
+.lookup-form {
+    display: flex;
+    gap: var(--zm-space-sm);
+    margin-top: var(--zm-space-lg);
+    max-width: 520px;
+}
+
+.lookup-form input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: var(--zm-radius-md);
+    border: 1px solid var(--zm-border);
+    background: var(--zm-surface);
+    color: var(--zm-text);
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.lookup-form input:focus {
+    outline: none;
+    border-color: var(--zm-accent);
+}
+
+.lookup-form .domain-suffix {
+    display: flex;
+    align-items: center;
+    color: var(--zm-text-muted);
+    padding: 0 var(--zm-space-sm);
+}
+
+.inbox-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: var(--zm-space-md);
+    margin-top: var(--zm-space-md);
+}
+
+@media (max-width: 800px) {
+    .inbox-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.inbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--zm-space-xs);
+    max-height: calc(100vh - 240px);
+    overflow-y: auto;
+}
+
+.inbox-list__item {
+    padding: var(--zm-space-md);
+    border: 1px solid var(--zm-border);
+    border-radius: var(--zm-radius-md);
+    background: var(--zm-surface);
+    cursor: pointer;
+    transition: border-color 120ms ease;
+}
+
+.inbox-list__item:hover {
+    border-color: var(--zm-accent);
+}
+
+.inbox-list__item--selected {
+    border-color: var(--zm-accent);
+}
+
+.inbox-list__from {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.inbox-list__subject {
+    font-size: 14px;
+    color: var(--zm-text-muted);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inbox-list__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--zm-space-xs);
+    font-size: 12px;
+    color: var(--zm-text-muted);
+}
+
+.inbox-empty {
+    text-align: center;
+    padding: var(--zm-space-xl);
+    color: var(--zm-text-muted);
+}
+
+.viewer-tabs {
+    display: flex;
+    gap: var(--zm-space-sm);
+    border-bottom: 1px solid var(--zm-border);
+    margin-bottom: var(--zm-space-md);
+}
+
+.viewer-tabs button {
+    background: none;
+    border: none;
+    color: var(--zm-text-muted);
+    padding: var(--zm-space-sm) var(--zm-space-md);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.viewer-tabs button[aria-selected='true'] {
+    color: var(--zm-text);
+    border-bottom-color: var(--zm-accent);
+}
+
+.viewer-frame {
+    width: 100%;
+    height: 60vh;
+    background: white;
+    border: 1px solid var(--zm-border);
+    border-radius: var(--zm-radius-md);
+}
+
+.viewer-text {
+    white-space: pre-wrap;
+    font-family: var(--zm-font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    background: var(--zm-bg-subtle);
+    border: 1px solid var(--zm-border);
+    border-radius: var(--zm-radius-md);
+    padding: var(--zm-space-md);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.refresh-status {
+    font-size: 12px;
+    color: var(--zm-text-muted);
+    margin-bottom: var(--zm-space-sm);
+}

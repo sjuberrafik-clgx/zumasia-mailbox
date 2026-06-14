@@ -1,0 +1,32 @@
+{
+    "name": "zumasia",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Zumasia — useful tiny tools. Product #1: temp mailbox.",
+    "packageManager": "pnpm@9.15.0",
+    "engines": {
+        "node": ">=20.18.0"
+    },
+    "scripts": {
+        "dev": "pnpm --filter @zumasia/web dev",
+        "build": "pnpm -r --filter='!@zumasia/db-mail' build",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "typecheck": "pnpm -r typecheck",
+        "test": "pnpm -r test",
+        "deploy:ingest": "pnpm --filter @zumasia/mail-ingest run deploy",
+        "deploy:purge": "pnpm --filter @zumasia/mail-purge run deploy",
+        "deploy:web": "pnpm --filter @zumasia/web run deploy",
+        "db:migrate:local": "pnpm --filter @zumasia/db-mail migrate:local",
+        "db:migrate:remote": "pnpm --filter @zumasia/db-mail migrate:remote"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^25.9.3",
+        "eslint": "^10.5.0",
+        "prettier": "^3.8.4",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.61.0"
+    }
+}

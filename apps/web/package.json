@@ -1,0 +1,31 @@
+{
+    "name": "@zumasia/web",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev --turbo",
+        "build": "next build",
+        "start": "next start",
+        "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+        "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+        "typecheck": "tsc --noEmit",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@opennextjs/cloudflare": "^1.19.11",
+        "@zumasia/shared": "workspace:*",
+        "@zumasia/ui": "workspace:*",
+        "next": "^16.2.9",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "zod": "^4.4.3"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20260613.1",
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "typescript": "^6.0.3",
+        "wrangler": "^4.100.0"
+    }
+}

@@ -91,11 +91,6 @@ export function ZumasiaFooter() {
             Crafted with care in India by Mr. Z.
           </p>
         </div>
-        <nav className="zm-footer__links" aria-label="Footer quick links">
-          <a href="/mail">Open Mail</a>
-          <a href="/about">About</a>
-          <a href="mailto:abuse@zumasia.com">abuse@zumasia.com</a>
-        </nav>
       </div>
     </footer>
   );

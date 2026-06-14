@@ -1,13 +1,30 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="16" fill="#23254A"/>
   <defs>
-    <linearGradient id="zumasia-favicon-gradient" x1="12" y1="14" x2="50" y2="47" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#5ED4FF"/>
-      <stop offset="1" stop-color="#2788E8"/>
+    <linearGradient id="zm-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080C13" />
+      <stop offset="1" stop-color="#141C2B" />
+    </linearGradient>
+    <linearGradient id="zm-top" x1="16" y1="20" x2="48" y2="20" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34D399" />
+      <stop offset="1" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="zm-bot" x1="16" y1="44" x2="48" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9" />
+      <stop offset="1" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="zm-diag" x1="48" y1="20" x2="16" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981" />
+      <stop offset="1" stop-color="#0EA5E9" />
     </linearGradient>
   </defs>
-  <circle cx="27" cy="31" r="15" stroke="url(#zumasia-favicon-gradient)" stroke-width="6"/>
-  <path d="M37 40L50 47L43 34" stroke="url(#zumasia-favicon-gradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="27" cy="31" r="8" stroke="#1F4D92" stroke-width="4.8"/>
-  <circle cx="27" cy="31" r="4.2" fill="#1F4D92"/>
+  <rect width="64" height="64" rx="16" fill="url(#zm-bg)" />
+  <rect x="0.5" y="0.5" width="63" height="63" rx="15.5" stroke="rgba(255,255,255,0.08)" />
+  <g opacity="0.3">
+    <path d="M 16 20 H 48" stroke="#000000" stroke-width="10" stroke-linecap="round" transform="translate(0, 3)" />
+    <path d="M 16 44 H 48" stroke="#000000" stroke-width="10" stroke-linecap="round" transform="translate(0, 3)" />
+  </g>
+  <path d="M 16 20 H 48" stroke="url(#zm-top)" stroke-width="10" stroke-linecap="round" />
+  <path d="M 16 44 H 48" stroke="url(#zm-bot)" stroke-width="10" stroke-linecap="round" />
+  <path d="M 16 44 L 48 20" stroke="#000000" stroke-width="10" stroke-linecap="round" opacity="0.4" transform="translate(-2, 2)" />
+  <path d="M 16 44 L 48 20" stroke="url(#zm-diag)" stroke-width="10" stroke-linecap="round" />
 </svg>

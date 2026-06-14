@@ -154,7 +154,6 @@ export function MessageViewer({ detail, isLoading = false, error, onRetry }: Mes
                             srcDoc={srcDoc}
                             referrerPolicy="no-referrer"
                             title="Message HTML"
-                            onLoad={autoSizeFrame}
                         />
                     </>
                 ) : null}
@@ -193,18 +192,6 @@ export function MessageViewer({ detail, isLoading = false, error, onRetry }: Mes
             </div>
         </article>
     );
-}
-
-function autoSizeFrame(e: React.SyntheticEvent<HTMLIFrameElement>) {
-    const frame = e.currentTarget;
-    try {
-        const doc = frame.contentDocument;
-        if (!doc?.body) return;
-        const height = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-        if (height > 0) frame.style.height = `${height + 32}px`;
-    } catch {
-        /* cross-origin or unavailable — keep the default height */
-    }
 }
 
 function countBlockedImages(html: string): number {

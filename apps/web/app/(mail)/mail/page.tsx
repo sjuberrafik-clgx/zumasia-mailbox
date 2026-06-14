@@ -12,6 +12,7 @@ export default function MailPage() {
     <div className="zm-container mail-page">
       <section className="mail-shell">
         <div className="mail-shell__copy">
+          <img src="/character.png" alt="Zumasia character leaning" className="hero-character" />
           <p className="hero__eyebrow">QA and developer mail testing</p>
           <h1>Public inboxes for QA and developer email testing.</h1>
           <p>

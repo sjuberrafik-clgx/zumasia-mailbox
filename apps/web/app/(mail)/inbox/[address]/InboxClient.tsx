@@ -76,6 +76,16 @@ export function InboxClient({ localPart, fullAddress }: Props) {
     }, [refresh]);
 
     useEffect(() => {
+        if (!messages || messages.length === 0) {
+            setSelectedId(null);
+            return;
+        }
+        if (!selectedId || !messages.some((message) => message.id === selectedId)) {
+            setSelectedId(messages[0]?.id ?? null);
+        }
+    }, [messages, selectedId]);
+
+    useEffect(() => {
         if (!selectedId) {
             setDetail(null);
             setDetailError(null);
@@ -142,12 +152,12 @@ export function InboxClient({ localPart, fullAddress }: Props) {
                         : 'Connecting';
 
     return (
-        <div className="zm-container">
+        <div className="zm-container inbox-page">
             <div className="inbox-header">
                 <div className="inbox-header__titles">
                     <div className="inbox-header__address-row">
                         <h1 className="inbox-header__address">{fullAddress}</h1>
-                        <button className="zm-button zm-button--ghost" type="button" onClick={copyAddress}>
+                        <button className="zm-button" type="button" onClick={copyAddress}>
                             {copied ? 'Copied' : 'Copy address'}
                         </button>
                     </div>
@@ -177,13 +187,24 @@ export function InboxClient({ localPart, fullAddress }: Props) {
             </WarningBanner>
 
             <div className="inbox-layout">
-                <InboxList messages={messages} selectedId={selectedId} onSelect={setSelectedId} />
-                <MessageViewer
-                    detail={detail}
-                    error={detailError}
-                    isLoading={detailLoading}
-                    onRetry={selectedId ? () => setDetailRetryKey((value) => value + 1) : undefined}
-                />
+                <section className="inbox-panel inbox-panel--list" aria-label="Inbox messages">
+                    <div className="inbox-panel__head">
+                        <h2 className="inbox-panel__title">Incoming mail</h2>
+                        <span className="inbox-panel__meta">
+                            {messages === null ? 'Loading' : `${messages.length} total`}
+                        </span>
+                    </div>
+                    <InboxList messages={messages} selectedId={selectedId} onSelect={setSelectedId} />
+                </section>
+
+                <section className="inbox-panel inbox-panel--viewer" aria-label="Message reader">
+                    <MessageViewer
+                        detail={detail}
+                        error={detailError}
+                        isLoading={detailLoading}
+                        onRetry={selectedId ? () => setDetailRetryKey((value) => value + 1) : undefined}
+                    />
+                </section>
             </div>
         </div>
     );

@@ -15,6 +15,7 @@ export default function ClipboardPage() {
     <div className="zm-container clip-page">
       <section className="clip-shell">
         <div className="clip-shell__copy">
+          <img src="/clipboard-character.png" alt="Zumasia character with a clipboard" className="hero-character" />
           <p className="hero__eyebrow">Cross-device sharing</p>
           <h1>Move text, images, and files between your devices.</h1>
           <p>

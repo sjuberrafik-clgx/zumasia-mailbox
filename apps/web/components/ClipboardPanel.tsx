@@ -57,6 +57,29 @@ function formatCountdown(ms: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
+const ICONS = {
+  text: (
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="4 7 4 4 20 4 20 7" />
+      <line x1="9" y1="20" x2="15" y2="20" />
+      <line x1="12" y1="4" x2="12" y2="20" />
+    </svg>
+  ),
+  image: (
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <polyline points="21 15 16 10 5 21" />
+    </svg>
+  ),
+  file: (
+    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+      <polyline points="13 2 13 9 20 9" />
+    </svg>
+  )
+};
+
 export function ClipboardPanel() {
   const [mode, setMode] = useState<Mode>('send');
 
@@ -222,7 +245,8 @@ function SendView() {
             className={`clip-kind${kind === k ? ' clip-kind--active' : ''}`}
             onClick={() => switchKind(k)}
           >
-            {k === 'text' ? 'Text' : k === 'image' ? 'Image' : 'File'}
+            {ICONS[k]}
+            <span>{k === 'text' ? 'Text' : k === 'image' ? 'Image' : 'File'}</span>
           </button>
         ))}
       </div>
@@ -276,7 +300,7 @@ function SendView() {
       ) : null}
 
       <button type="submit" className="zm-button zm-button--primary clip-submit" disabled={busy}>
-        {busy ? 'Generating…' : 'Generate code'}
+        {busy ? 'Preparing…' : 'Share'}
       </button>
     </form>
   );

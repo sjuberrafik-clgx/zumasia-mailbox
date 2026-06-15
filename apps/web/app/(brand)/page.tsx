@@ -72,7 +72,10 @@ export default function HomePage() {
 
         <div className="products-grid">
           {products.map((p) => (
-            <Card key={p.slug} className={`product-card product-card--${p.status}`}>
+            <Card key={p.slug} className={`product-card product-card--${p.status} ${p.slug === 'clipboard' ? 'product-card--clipboard' : ''}`}>
+              {p.slug === 'clipboard' && (
+                <img src="/clipboard-character.png" alt="Zumasia character with a clipboard" className="product-card__character" />
+              )}
               <div className="product-card__head">
                 <div>
                   <p className="product-card__kicker">Zumasia {p.name}</p>

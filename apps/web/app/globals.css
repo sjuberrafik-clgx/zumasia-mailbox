@@ -546,8 +546,9 @@ code {
     align-items: center;
     flex: 0 0 auto;
     border-left: 1px solid rgba(58, 70, 85, 0.72);
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--zm-text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--zm-text);
+    font-weight: 500;
     font-size: var(--zm-type-body-sm-size);
     padding: 0 14px;
     white-space: nowrap;

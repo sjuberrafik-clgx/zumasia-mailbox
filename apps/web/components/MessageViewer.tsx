@@ -3,8 +3,6 @@
 import { useMemo, useState } from 'react';
 import type { MessageDetail } from '@zumasia/shared/schemas';
 
-type Tab = 'html' | 'text' | 'headers' | 'attachments';
-
 type MessageViewerProps = {
     detail: MessageDetail | null;
     isLoading?: boolean;
@@ -13,7 +11,6 @@ type MessageViewerProps = {
 };
 
 export function MessageViewer({ detail, isLoading = false, error, onRetry }: MessageViewerProps) {
-    const [tab, setTab] = useState<Tab>('html');
     const [showImages, setShowImages] = useState(false);
 
     const blockedImages = useMemo(
@@ -67,19 +64,6 @@ export function MessageViewer({ detail, isLoading = false, error, onRetry }: Mes
         );
     }
 
-    const tabs: ReadonlyArray<{ id: Tab; label: string; show: boolean }> = [
-        { id: 'html', label: 'HTML', show: Boolean(detail.htmlBody) },
-        { id: 'text', label: 'Plain text', show: Boolean(detail.textBody) },
-        { id: 'headers', label: 'Headers', show: true },
-        {
-            id: 'attachments',
-            label: `Attachments (${detail.attachments.length})`,
-            show: detail.attachments.length > 0,
-        },
-    ];
-
-    const visibleTabs = tabs.filter((t) => t.show);
-    const activeTab = visibleTabs.some((t) => t.id === tab) ? tab : visibleTabs[0]?.id;
     const display = detail.fromName ?? detail.fromAddr;
     const initial = (display || '?').trim().charAt(0).toUpperCase();
 
@@ -113,23 +97,8 @@ export function MessageViewer({ detail, isLoading = false, error, onRetry }: Mes
                 </div>
             </header>
 
-            <nav className="viewer__tabs" role="tablist" aria-label="Message views">
-                {visibleTabs.map((t) => (
-                    <button
-                        key={t.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={activeTab === t.id}
-                        className="viewer__tab"
-                        onClick={() => setTab(t.id)}
-                    >
-                        {t.label}
-                    </button>
-                ))}
-            </nav>
-
             <div className="viewer__content">
-                {activeTab === 'html' && detail.htmlBody ? (
+                {detail.htmlBody ? (
                     <>
                         {blockedImages > 0 ? (
                             <div className="viewer__images-bar">
@@ -156,38 +125,37 @@ export function MessageViewer({ detail, isLoading = false, error, onRetry }: Mes
                             title="Message HTML"
                         />
                     </>
-                ) : null}
+                ) : detail.textBody ? (
+                    <pre className="viewer__pre">{detail.textBody}</pre>
+                ) : (
+                    <pre className="viewer__pre">(no message body)</pre>
+                )}
 
-                {activeTab === 'text' ? (
-                    <pre className="viewer__pre">{detail.textBody ?? '(no plain-text part)'}</pre>
-                ) : null}
-
-                {activeTab === 'headers' ? (
-                    <pre className="viewer__pre">{JSON.stringify(detail.headers, null, 2)}</pre>
-                ) : null}
-
-                {activeTab === 'attachments' ? (
-                    <ul className="viewer__attachments">
-                        {detail.attachments.map((a) => (
-                            <li key={a.id} className="viewer__attachment">
-                                <span className="viewer__attachment-icon" aria-hidden>
-                                    📎
-                                </span>
-                                <div className="viewer__attachment-body">
-                                    <a
-                                        href={`/api/attachment/${encodeURIComponent(a.id)}`}
-                                        rel="noopener noreferrer"
-                                        className="viewer__attachment-name"
-                                    >
-                                        {a.filename}
-                                    </a>
-                                    <div className="viewer__attachment-meta">
-                                        {a.contentType} · {formatBytes(a.sizeBytes)}
+                {detail.attachments.length > 0 ? (
+                    <div className="viewer__attachments-section" style={{ marginTop: '24px' }}>
+                        <h3 style={{ margin: '0 0 12px', fontSize: '14px', fontWeight: 600 }}>Attachments ({detail.attachments.length})</h3>
+                        <ul className="viewer__attachments">
+                            {detail.attachments.map((a) => (
+                                <li key={a.id} className="viewer__attachment">
+                                    <span className="viewer__attachment-icon" aria-hidden>
+                                        📎
+                                    </span>
+                                    <div className="viewer__attachment-body">
+                                        <a
+                                            href={`/api/attachment/${encodeURIComponent(a.id)}`}
+                                            rel="noopener noreferrer"
+                                            className="viewer__attachment-name"
+                                        >
+                                            {a.filename}
+                                        </a>
+                                        <div className="viewer__attachment-meta">
+                                            {a.contentType} · {formatBytes(a.sizeBytes)}
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ) : null}
             </div>
         </article>

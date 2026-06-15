@@ -55,8 +55,7 @@ export async function parseMail(raw: ReadableStream<Uint8Array>): Promise<Parsed
     };
   });
 
-  const dateHeader = parsed.date ? Date.parse(parsed.date) : NaN;
-  const receivedAt = Number.isFinite(dateHeader) ? dateHeader : Date.now();
+  const receivedAt = Date.now();
 
   return {
     messageId: parsed.messageId ?? null,

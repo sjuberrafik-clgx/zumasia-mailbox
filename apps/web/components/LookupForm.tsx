@@ -29,7 +29,7 @@ export function LookupForm() {
           inputMode="email"
           autoComplete="off"
           spellCheck={false}
-          placeholder="anything"
+          placeholder="enter any mail"
           aria-label="Inbox name"
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error ? errorId : undefined}

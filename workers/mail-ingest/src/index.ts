@@ -38,21 +38,35 @@ export default {
       }
 
       const rawEml = await new Response(message.raw).arrayBuffer();
-      const parsed = await parseMail(new Response(rawEml).body as ReadableStream<Uint8Array>);
 
-      // We bypass doing CPU-heavy HTML sanitization in the ingest worker because 
-      // heavily branded/complex HTML emails (like Canopy UAT) can cause the worker 
-      // to exceed its 50ms CPU limit and forcefully terminate. Instead, we save the 
-      // raw parsed HTML and sanitize it during the frontend API fetch.
-      const rawHtml = parsed.html || '';
+      // Avoid CPU-heavy parsing in the ingest pipeline. We'll extract basic
+      // metadata directly from Cloudflare's message headers.
+      const contentType = message.headers.get('Content-Type') || '';
+      const hasAttachments = contentType.includes('multipart/mixed') || contentType.includes('multipart/related');
+
+      const parsed = {
+        messageId: message.headers.get('Message-ID') || null,
+        fromAddr: message.from.toLowerCase(),
+        fromName: message.headers.get('From')
+          ? message.headers.get('From')?.replace(/<[^>]+>/g, '').trim() || null
+          : null,
+        to: [fullAddress],
+        subject: message.headers.get('Subject') || null,
+        text: null,
+        html: null,
+        headers: {}, // Optional: could stringify message.headers, but R2 holds the raw source
+        receivedAt: Date.now(),
+        attachments: [],
+      };
 
       const messageId = await storeMessage({
         env,
         fullAddress,
         parsed,
         rawEml,
-        sanitizedHtml: rawHtml, // stored locally as is, sanitised later
+        sanitizedHtml: '', // offloaded entirely
         retentionMs: RETENTION_MS,
+        hasAttachmentsFallback: hasAttachments,
       });
 
       ctx.waitUntil(
@@ -70,14 +84,12 @@ export default {
         }),
       );
     } catch (err) {
-      const errMsg = err instanceof Error ? err.message : String(err);
+      const errMsg = err instanceof Error ? err.stack || err.message : String(err);
       console.error(JSON.stringify({ evt: 'ingest_error', inbox: fullAddress, err: errMsg }));
-      ctx.waitUntil(
-        logIngestError(env, 'mail-ingest', errMsg, {
-          inbox: fullAddress,
-          from: message.from,
-        }),
-      );
+      await logIngestError(env, 'mail-ingest', errMsg, {
+        inbox: fullAddress,
+        from: message.from,
+      });
       message.setReject('Temporary failure, please retry');
     }
   },

@@ -30,14 +30,15 @@ function attachmentKey(messageId: string, index: number, filename: string): stri
 export type StoreInput = {
   env: Env;
   fullAddress: string;
-  parsed: ParsedMail;
+  parsed: any;
   rawEml: ArrayBuffer;
   sanitizedHtml: string;
   retentionMs: number;
+  hasAttachmentsFallback?: boolean;
 };
 
 export async function storeMessage(input: StoreInput): Promise<string> {
-  const { env, fullAddress, parsed, rawEml, sanitizedHtml, retentionMs } = input;
+  const { env, fullAddress, parsed, rawEml, sanitizedHtml, retentionMs, hasAttachmentsFallback } = input;
 
   const id = uuidv7();
   const receivedAt = parsed.receivedAt;
@@ -48,13 +49,9 @@ export async function storeMessage(input: StoreInput): Promise<string> {
     httpMetadata: { contentType: 'message/rfc822' },
   });
 
-  const safeAttachments: Array<{
-    id: string;
-    attachment: ParsedAttachment;
-    key: string;
-  }> = [];
+  const safeAttachments: Array<any> = [];
 
-  for (let i = 0; i < parsed.attachments.length; i++) {
+  for (let i = 0; i < (parsed.attachments || []).length; i++) {
     const att = parsed.attachments[i]!;
     const ext = getExtension(att.filename);
     if (BLOCKED_ATTACHMENT_EXTENSIONS.has(ext)) continue;
@@ -95,7 +92,7 @@ export async function storeMessage(input: StoreInput): Promise<string> {
       receivedAt,
       expiresAt,
       rawEml.byteLength,
-      safeAttachments.length > 0 ? 1 : 0,
+      hasAttachmentsFallback || safeAttachments.length > 0 ? 1 : 0,
       parsed.text,
       sanitizedHtml || null,
       JSON.stringify(parsed.headers),

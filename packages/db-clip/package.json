@@ -1,0 +1,13 @@
+{
+  "name": "@zumasia/db-clip",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "migrate:local": "wrangler d1 migrations apply zumasia-clip --local",
+    "migrate:remote": "wrangler d1 migrations apply zumasia-clip --remote",
+    "create:local": "wrangler d1 create zumasia-clip"
+  },
+  "devDependencies": {
+    "wrangler": "^4.100.0"
+  }
+}

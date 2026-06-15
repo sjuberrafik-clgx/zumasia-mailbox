@@ -19,9 +19,9 @@ export const products: readonly Product[] = [
   {
     slug: 'clipboard',
     name: 'Clipboard',
-    tagline: 'Share text and snippets through short links with automatic expiry.',
-    status: 'soon',
-    url: 'https://clip.zumasia.com',
+    tagline: 'Share text, images, and files between devices with a one-time 6-digit code.',
+    status: 'live',
+    url: '/clipboard',
   },
 ] as const;
 

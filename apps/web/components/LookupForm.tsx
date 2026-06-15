@@ -15,7 +15,7 @@ export function LookupForm() {
     e.preventDefault();
     const local = normalizeLocalPart(value);
     if (!local) {
-      setError('Use letters, numbers, dots, dashes, or underscores. Reserved names are blocked.');
+      setError('Use letters, numbers, dots, dashes, underscores, or a +tag. Reserved names are blocked.');
       return;
     }
     router.push(`/inbox/${encodeURIComponent(local)}`);

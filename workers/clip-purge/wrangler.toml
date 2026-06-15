@@ -1,0 +1,15 @@
+name = "zumasia-clip-purge"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[d1_databases]]
+binding = "CLIP_DB"
+database_name = "zumasia-clip"
+database_id = "45481983-cc77-4ee6-9286-a82afd4e533b"
+
+[[r2_buckets]]
+binding = "CLIP_BUCKET"
+bucket_name = "zumasia-clip-blob"

@@ -7,6 +7,7 @@ type HeaderProps = {
 
 const primaryLinks = [
     { href: '/mail', label: 'Mail', tone: 'mail' },
+    { href: '/clipboard', label: 'Clipboard', tone: 'clipboard' },
     { href: '/about', label: 'About', tone: 'about' },
 ];
 

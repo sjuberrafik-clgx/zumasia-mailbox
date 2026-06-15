@@ -1,0 +1,8 @@
+name = "zumasia-db-clip"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "CLIP_DB"
+database_name = "zumasia-clip"
+database_id = "45481983-cc77-4ee6-9286-a82afd4e533b"
+migrations_dir = "migrations"

@@ -14,6 +14,15 @@ database_id = "12749b24-b21d-4f5d-bbca-89321113db93"
 binding = "EML_BUCKET"
 bucket_name = "zumasia-mail-eml"
 
+[[r2_buckets]]
+binding = "CLIP_BUCKET"
+bucket_name = "zumasia-clip-blob"
+
+[[d1_databases]]
+binding = "CLIP_DB"
+database_name = "zumasia-clip"
+database_id = "45481983-cc77-4ee6-9286-a82afd4e533b"
+
 [[kv_namespaces]]
 binding = "RATELIMIT_KV"
 id = "8b4e46a080d74af3b313bbf34000ecdf"

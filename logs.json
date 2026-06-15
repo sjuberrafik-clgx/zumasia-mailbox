@@ -1,0 +1,126 @@
+{
+    "wallTime": 0,
+    "cpuTime": 0,
+    "truncated": false,
+    "executionModel": "stateless",
+    "outcome": "exception",
+    "scriptVersion": {
+        "id": "68a56bc7-dd9e-46c9-b987-cd7cfdce4545"
+    },
+    "scriptName": "zumasia-mail-ingest",
+    "diagnosticsChannelEvents": [],
+    "exceptions": [
+        {
+            "name": "Error",
+            "message": "Handler does not export a fetch() function.",
+            "timestamp": 1781500376567
+        }
+    ],
+    "logs": [
+        {
+            "message": [
+                "Received a FetchEvent but we lack a handler for FetchEvents. Did you remember to export a fetch() function?"
+            ],
+            "level": "warn",
+            "timestamp": 1781500376567
+        }
+    ],
+    "eventTimestamp": 1781500376548,
+    "event": {
+        "request": {
+            "url": "https://zumasia-mail-ingest.zumasia.workers.dev/",
+            "method": "GET",
+            "headers": {
+                "accept-encoding": "gzip, br",
+                "cf-connecting-ip": "2a06:98c0:3600::103",
+                "cf-ipcountry": "US",
+                "cf-ray": "a0bf152950bedc11",
+                "cf-visitor": "{\"scheme\":\"https\"}",
+                "cf-worker": "cfone.cfdata.org",
+                "connection": "Keep-Alive",
+                "host": "zumasia-mail-ingest.zumasia.workers.dev",
+                "x-forwarded-proto": "https",
+                "x-real-ip": "2a06:98c0:3600::103"
+            },
+            "cf": {
+                "requestHeaderNames": {},
+                "httpProtocol": "HTTP/1.1",
+                "tlsCipher": "",
+                "continent": "NA",
+                "asn": 13335,
+                "clientAcceptEncoding": "identity",
+                "verifiedBotCategory": "",
+                "country": "US",
+                "isEUCountry": false,
+                "region": "Washington",
+                "tlsClientCiphersSha1": "",
+                "tlsClientAuth": {
+                    "certIssuerDNLegacy": "",
+                    "certIssuerSKI": "",
+                    "certSubjectDNRFC2253": "",
+                    "certSubjectDNLegacy": "",
+                    "certFingerprintSHA256": "",
+                    "certNotBefore": "",
+                    "certSKI": "",
+                    "certSerial": "",
+                    "certIssuerDN": "",
+                    "certVerified": "NONE",
+                    "certNotAfter": "",
+                    "certSubjectDN": "",
+                    "certPresented": "0",
+                    "certRevoked": "0",
+                    "certIssuerSerial": "",
+                    "certIssuerDNRFC2253": "",
+                    "certFingerprintSHA1": ""
+                },
+                "tlsClientRandom": "",
+                "tlsClientHelloLength": "",
+                "colo": "SEA",
+                "timezone": "America/Los_Angeles",
+                "longitude": "-122.33207",
+                "latitude": "47.60621",
+                "edgeRequestKeepAliveStatus": 1,
+                "requestPriority": "",
+                "postalCode": "98101",
+                "city": "Seattle",
+                "tlsVersion": "",
+                "regionCode": "WA",
+                "asOrganization": "Cloudflare, Inc.",
+                "metroCode": "819",
+                "tlsClientExtensionsSha1Le": "",
+                "tlsClientExtensionsSha1": ""
+            }
+        },
+        "response": {
+            "status": 500
+        }
+    }
+}
+{
+    "wallTime": 426,
+    "cpuTime": 13,
+    "truncated": false,
+    "executionModel": "stateless",
+    "outcome": "ok",
+    "scriptVersion": {
+        "id": "68a56bc7-dd9e-46c9-b987-cd7cfdce4545"
+    },
+    "scriptName": "zumasia-mail-ingest",
+    "diagnosticsChannelEvents": [],
+    "exceptions": [],
+    "logs": [
+        {
+            "message": [
+                "{\"evt\":\"mail_ingested\",\"id\":\"019ec9c7-0c0b-71af-a0e0-ac31d78cb13c\",\"inbox\":\"user5@zumasia.com\",\"from\":\"rebny@matrixstaging.com\",\"size\":26970,\"attachments\":0}"
+            ],
+            "level": "log",
+            "timestamp": 1781501726078
+        }
+    ],
+    "eventTimestamp": 1781501725640,
+    "event": {
+        "rawSize": 26970,
+        "rcptTo": "user5@zumasia.com",
+        "mailFrom": "REBNY@matrixstaging.com"
+    }
+}

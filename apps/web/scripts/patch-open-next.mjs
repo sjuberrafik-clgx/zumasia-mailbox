@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * patch-open-next.mjs
  *

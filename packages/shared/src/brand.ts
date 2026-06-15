@@ -3,8 +3,8 @@ export const BRAND_TAGLINE = 'Practical no-account tools for email workflow test
 export const MAIL_DOMAIN = 'zumasia.com';
 export const MAIL_PRODUCT_NAME = 'Mail';
 export const RETENTION_HOURS = 24;
-export const MAX_MESSAGE_BYTES = 10 * 1024 * 1024;
-export const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024;
+export const MAX_MESSAGE_BYTES = 25 * 1024 * 1024;
+export const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 export const INBOX_LIST_LIMIT = 50;
 
 export const RESERVED_LOCAL_PARTS = new Set([

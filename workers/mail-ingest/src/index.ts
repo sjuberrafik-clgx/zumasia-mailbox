@@ -11,12 +11,21 @@ const RETENTION_MS = RETENTION_HOURS * 60 * 60 * 1000;
 export default {
   async email(message: ForwardableEmailMessage, env: Env, ctx: ExecutionContext): Promise<void> {
     if (message.rawSize > MAX_MESSAGE_BYTES) {
+      console.warn(`Message too large: ${message.rawSize} bytes from ${message.from} to ${message.to}`);
+      ctx.waitUntil(
+        logIngestError(env, 'mail-ingest', 'Message too large', {
+          inbox: message.to,
+          from: message.from,
+          size: message.rawSize,
+        }),
+      );
       message.setReject('Message too large');
       return;
     }
 
     const localPart = normalizeLocalPart(message.to);
     if (!localPart) {
+      console.warn(`Invalid recipient: ${message.to}`);
       message.setReject('Invalid recipient');
       return;
     }

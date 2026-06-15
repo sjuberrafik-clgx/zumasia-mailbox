@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { AttachmentMeta, MessageDetail } from '@zumasia/shared/schemas';
+import { sanitizeMessageHtml } from '@zumasia/shared/sanitize';
 import { bindings, getClientIp } from '@/lib/cf';
 import { rateLimit } from '@/lib/ratelimit';
 
@@ -83,7 +84,7 @@ export async function GET(req: Request, ctx: { params: Promise<Params> }) {
         hasAttachments: row.has_attachments === 1,
         sizeBytes: row.size_bytes,
         textBody: row.text_body,
-        htmlBody: row.html_body_sanitized,
+        htmlBody: row.html_body_sanitized ? sanitizeMessageHtml(row.html_body_sanitized) : null,
         headers,
         attachments,
     };

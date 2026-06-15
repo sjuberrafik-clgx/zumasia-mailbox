@@ -1,4 +1,3 @@
-import { sanitizeMessageHtml } from '@zumasia/shared/sanitize';
 import { normalizeLocalPart, fullAddressFromLocalPart } from '@zumasia/shared/address';
 import { MAX_MESSAGE_BYTES, RETENTION_HOURS } from '@zumasia/shared/brand';
 import type { Env } from './env.ts';
@@ -41,14 +40,18 @@ export default {
       const rawEml = await new Response(message.raw).arrayBuffer();
       const parsed = await parseMail(new Response(rawEml).body as ReadableStream<Uint8Array>);
 
-      const sanitizedHtml = parsed.html ? sanitizeMessageHtml(parsed.html) : '';
+      // We bypass doing CPU-heavy HTML sanitization in the ingest worker because 
+      // heavily branded/complex HTML emails (like Canopy UAT) can cause the worker 
+      // to exceed its 50ms CPU limit and forcefully terminate. Instead, we save the 
+      // raw parsed HTML and sanitize it during the frontend API fetch.
+      const rawHtml = parsed.html || '';
 
       const messageId = await storeMessage({
         env,
         fullAddress,
         parsed,
         rawEml,
-        sanitizedHtml,
+        sanitizedHtml: rawHtml, // stored locally as is, sanitised later
         retentionMs: RETENTION_MS,
       });
 

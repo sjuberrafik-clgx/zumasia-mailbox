@@ -4,7 +4,7 @@
 
 Zumasia is a multi-product brand starting with **Mail**: public, free, anonymous,
 disposable inboxes at `*@zumasia.com`. Anyone can lookup any address and read its
-mail until auto-purge (24h). Mailinator-style.
+mail until auto-purge (8h). Mailinator-style.
 
 This is a `$0/month` Cloudflare-only stack: Workers + D1 + R2 + Pages, deployed
 via the OpenNext Cloudflare adapter.

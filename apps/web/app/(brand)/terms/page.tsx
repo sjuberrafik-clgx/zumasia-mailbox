@@ -1,3 +1,5 @@
+import { RETENTION_HOURS } from '@zumasia/shared/brand';
+
 export const metadata = { title: 'Terms of Use' };
 
 export default function TermsPage() {
@@ -20,7 +22,7 @@ export default function TermsPage() {
         <p>
           Zumasia is provided “as-is”, free of charge, with no warranty, no service-level agreement,
           no guarantee of availability, durability, or delivery. Messages are auto-purged after a
-          short retention window (currently 24 hours).
+          short retention window (currently {RETENTION_HOURS} hours).
         </p>
 
         <h2>3. Acceptable use</h2>

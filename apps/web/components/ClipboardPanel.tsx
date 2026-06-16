@@ -123,7 +123,7 @@ function SendView() {
 
   const remaining = useCountdown(sent?.expiresAt ?? null);
   useEffect(() => {
-    if (sent && remaining <= 0) setSent(null);
+    if (sent && Date.now() >= sent.expiresAt) setSent(null);
   }, [sent, remaining]);
 
   function reset() {

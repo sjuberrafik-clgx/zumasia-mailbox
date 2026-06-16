@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { ZumasiaHeader, ZumasiaFooter } from '@zumasia/ui';
+import { GreetingBanner } from '@/components/GreetingBanner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="zm-app">
         <ZumasiaHeader />
+        <GreetingBanner />
         <main className="zm-main">{children}</main>
         <ZumasiaFooter />
       </body>

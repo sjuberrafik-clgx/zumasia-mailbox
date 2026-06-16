@@ -1,3 +1,5 @@
+import { RETENTION_HOURS } from '@zumasia/shared/brand';
+
 export const metadata = { title: 'Privacy Policy' };
 
 export default function PrivacyPage() {
@@ -13,7 +15,7 @@ export default function PrivacyPage() {
         <ul>
           <li>
             <strong>Email content</strong> sent to <code>*@zumasia.com</code> by third parties. Stored
-            temporarily (currently up to 24 hours) and made publicly readable to anyone who knows the
+            temporarily (currently up to {RETENTION_HOURS} hours) and made publicly readable to anyone who knows the
             inbox address.
           </li>
           <li>
@@ -30,7 +32,7 @@ export default function PrivacyPage() {
 
         <h2>Retention</h2>
         <p>
-          Email content and attachments are auto-purged within 48 hours of receipt (target: 24 hours).
+          Email content and attachments are auto-purged within {RETENTION_HOURS * 2} hours of receipt (target: {RETENTION_HOURS} hours).
           Server logs are retained briefly by Cloudflare per their standard policy.
         </p>
 

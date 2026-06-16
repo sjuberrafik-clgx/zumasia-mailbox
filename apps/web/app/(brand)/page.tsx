@@ -1,5 +1,5 @@
 import { Card, ProductBadge, products } from '@zumasia/ui';
-import { BRAND_TAGLINE } from '@zumasia/shared/brand';
+import { BRAND_TAGLINE, RETENTION_HOURS } from '@zumasia/shared/brand';
 import { LookupForm } from '@/components/LookupForm';
 
 function HeroMailIcon({ className }: { className?: string }) {
@@ -37,7 +37,7 @@ export default function HomePage() {
           <div className="home-shell__meta" aria-label="Product qualities">
             <span>QA friendly</span>
             <span>Developer ready</span>
-            <span>24h retention</span>
+            <span>{RETENTION_HOURS}h retention</span>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ export default function HomePage() {
           </div>
           <p>Open any public inbox at zumasia.com to test signup flows, delivery steps, and transactional email behavior.</p>
           <LookupForm />
-          <p className="home-mail-panel__note">Every inbox is public and messages are removed automatically after 24 hours.</p>
+          <p className="home-mail-panel__note">Every inbox is public and messages are removed automatically after {RETENTION_HOURS} hours.</p>
         </div>
       </section>
 

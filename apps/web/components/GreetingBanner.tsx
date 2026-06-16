@@ -2,17 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react';
 import {
-  greetingForHour,
-  type GreetingPack,
+    greetingForHour,
+    type GreetingPack,
 } from '@zumasia/shared';
 
 const SESSION_KEY = 'zm-greeting-shown';
 const AUTO_DISMISS_MS = 6000;
 
 type GreetingResponse = {
-  pack: GreetingPack;
-  country: string | null;
-  region: string | null;
+    pack: GreetingPack;
+    country: string | null;
+    region: string | null;
 };
 
 /**
@@ -26,94 +26,109 @@ type GreetingResponse = {
  * - Falls back silently (renders nothing) on any error.
  */
 export function GreetingBanner() {
-  const [pack, setPack] = useState<GreetingPack | null>(null);
-  const [greeting, setGreeting] = useState('');
-  const [leaving, setLeaving] = useState(false);
-  const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const removeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [pack, setPack] = useState<GreetingPack | null>(null);
+    const [greeting, setGreeting] = useState('');
+    const [leaving, setLeaving] = useState(false);
+    const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const removeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
 
-    let shown = false;
-    try {
-      shown = window.sessionStorage.getItem(SESSION_KEY) === '1';
-    } catch {
-      // sessionStorage may be unavailable (private mode); show once per load.
-    }
-    if (shown) return;
-
-    const controller = new AbortController();
-
-    (async () => {
-      try {
-        const res = await fetch('/api/greeting', {
-          signal: controller.signal,
-          headers: { accept: 'application/json' },
-        });
-        if (!res.ok) return;
-        const data = (await res.json()) as GreetingResponse;
-        if (!data?.pack) return;
-
+        let shown = false;
         try {
-          window.sessionStorage.setItem(SESSION_KEY, '1');
+            shown = window.sessionStorage.getItem(SESSION_KEY) === '1';
         } catch {
-          // Ignore storage failures.
+            // sessionStorage may be unavailable (private mode); show once per load.
         }
+        if (shown) return;
 
-        setGreeting(greetingForHour(data.pack, new Date().getHours()));
-        setPack(data.pack);
+        const controller = new AbortController();
 
-        dismissTimer.current = setTimeout(() => setLeaving(true), AUTO_DISMISS_MS);
-      } catch {
-        // Network/parse error — stay silent.
-      }
-    })();
+        (async () => {
+            try {
+                const res = await fetch('/api/greeting', {
+                    signal: controller.signal,
+                    headers: { accept: 'application/json' },
+                });
+                if (!res.ok) return;
+                const data = (await res.json()) as GreetingResponse;
+                if (!data?.pack) return;
 
-    return () => {
-      controller.abort();
-      if (dismissTimer.current) clearTimeout(dismissTimer.current);
-      if (removeTimer.current) clearTimeout(removeTimer.current);
-    };
-  }, []);
+                try {
+                    window.sessionStorage.setItem(SESSION_KEY, '1');
+                } catch {
+                    // Ignore storage failures.
+                }
 
-  useEffect(() => {
-    if (!leaving) return;
-    removeTimer.current = setTimeout(() => setPack(null), 400);
-    return () => {
-      if (removeTimer.current) clearTimeout(removeTimer.current);
-    };
-  }, [leaving]);
+                setGreeting(greetingForHour(data.pack, new Date().getHours()));
+                setPack(data.pack);
 
-  if (!pack) return null;
+                dismissTimer.current = setTimeout(() => setLeaving(true), AUTO_DISMISS_MS);
+            } catch {
+                // Network/parse error — stay silent.
+            }
+        })();
 
-  function close() {
-    setLeaving(true);
-  }
+        return () => {
+            controller.abort();
+            if (dismissTimer.current) clearTimeout(dismissTimer.current);
+            if (removeTimer.current) clearTimeout(removeTimer.current);
+        };
+    }, []);
 
-  return (
-    <div
-      className={`zm-greeting${leaving ? ' zm-greeting--leaving' : ''}`}
-      role="status"
-      aria-live="polite"
-    >
-      <div className="zm-greeting__inner">
-        <span className="zm-greeting__icon" aria-hidden="true">
-          {pack.icon}
-        </span>
-        <span className="zm-greeting__text" dir={pack.dir}>
-          <span className="zm-greeting__hello">{greeting}</span>
-          <span className="zm-greeting__welcome">{pack.welcome}</span>
-        </span>
-      </div>
-      <button
-        type="button"
-        className="zm-greeting__close"
-        onClick={close}
-        aria-label="Dismiss greeting"
-      >
-        ×
-      </button>
-    </div>
-  );
+    useEffect(() => {
+        if (!leaving) return;
+        removeTimer.current = setTimeout(() => setPack(null), 400);
+        return () => {
+            if (removeTimer.current) clearTimeout(removeTimer.current);
+        };
+    }, [leaving]);
+
+    if (!pack) return null;
+
+    function close() {
+        setLeaving(true);
+    }
+
+    return (
+        <div className="zm-greeting-wrapper">
+            <div
+                className={`zm-greeting${leaving ? ' zm-greeting--leaving' : ''}`}
+                role="status"
+                aria-live="polite"
+            >
+                <div className="zm-greeting__inner">
+                    <span className="zm-greeting__icon" aria-hidden="true">
+                        {pack.icon}
+                    </span>
+                    <span className="zm-greeting__text" dir={pack.dir}>
+                        <span className="zm-greeting__hello">{greeting}</span>
+                        <span className="zm-greeting__welcome">— {pack.welcome}</span>
+                    </span>
+                </div>
+                <button
+                    type="button"
+                    className="zm-greeting__close"
+                    onClick={close}
+                    aria-label="Dismiss greeting"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    );
 }

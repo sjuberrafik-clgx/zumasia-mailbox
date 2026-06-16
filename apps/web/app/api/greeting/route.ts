@@ -11,18 +11,18 @@ export const dynamic = 'force-dynamic';
  * geo so the banner can be exercised without a real Cloudflare edge.
  */
 export function GET(req: Request) {
-  let { country, region } = getGeo(req);
+    let { country, region } = getGeo(req);
 
-  if (process.env.NODE_ENV !== 'production') {
-    const url = new URL(req.url);
-    country = url.searchParams.get('country') ?? country;
-    region = url.searchParams.get('region') ?? region;
-  }
+    if (process.env.NODE_ENV !== 'production') {
+        const url = new URL(req.url);
+        country = url.searchParams.get('country') ?? country;
+        region = url.searchParams.get('region') ?? region;
+    }
 
-  const pack = resolveGreeting({ country, region });
+    const pack = resolveGreeting({ country, region });
 
-  return NextResponse.json(
-    { pack, country, region },
-    { headers: { 'cache-control': 'no-store' } },
-  );
+    return NextResponse.json(
+        { pack, country, region },
+        { headers: { 'cache-control': 'no-store' } },
+    );
 }

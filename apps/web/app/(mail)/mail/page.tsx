@@ -6,6 +6,17 @@ import { MAIL_DOMAIN, RETENTION_HOURS, SITE_URL } from '@zumasia/shared/brand';
 export const metadata = {
   title: 'Public Temp Mail & Disposable Email Inboxes',
   description: `Free disposable email inboxes at *@${MAIL_DOMAIN} for email workflow testing, QA verification, and developer checks. No signup, auto-purge after ${RETENTION_HOURS}h.`,
+  keywords: [
+    'disposable mail',
+    'disposable mailbox',
+    'temporary mail',
+    'temporary mailbox',
+    'temp mail',
+    'disposable email',
+    'temporary email',
+    'public inbox',
+    'email testing',
+  ],
   alternates: { canonical: '/mail' },
 };
 

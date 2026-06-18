@@ -8,8 +8,17 @@ const TTL_MINUTES = Math.round(CLIP_TTL_MS / 60000);
 const MAX_FILE_MB = Math.round(MAX_CLIP_FILE_BYTES / (1024 * 1024));
 
 export const metadata = {
-  title: 'Share Text, Images & Files Between Devices',
+  title: 'Online Clipboard — Share Text & Files Between Devices',
   description: `Online clipboard to share text, images, and files between devices with a one-time 6-digit code. No account, auto-expires after ${TTL_MINUTES} minutes.`,
+  keywords: [
+    'online clipboard',
+    'clipboard online',
+    'share text online',
+    'share text between devices',
+    'share files between devices',
+    'cross-device clipboard',
+    'useful tiny tools',
+  ],
   alternates: { canonical: '/clipboard' },
 };
 

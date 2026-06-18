@@ -1,15 +1,42 @@
 import { WarningBanner } from '@zumasia/ui';
 import { LookupForm } from '@/components/LookupForm';
-import { MAIL_DOMAIN, RETENTION_HOURS } from '@zumasia/shared/brand';
+import { JsonLd } from '@/components/JsonLd';
+import { MAIL_DOMAIN, RETENTION_HOURS, SITE_URL } from '@zumasia/shared/brand';
 
 export const metadata = {
-  title: 'Mail — public temp inboxes',
-  description: `Open a public temp inbox at *@${MAIL_DOMAIN} for email workflow testing, QA verification, and developer checks. No signup, auto-purge after ${RETENTION_HOURS}h.`,
+  title: 'Public Temp Mail & Disposable Email Inboxes',
+  description: `Free disposable email inboxes at *@${MAIL_DOMAIN} for email workflow testing, QA verification, and developer checks. No signup, auto-purge after ${RETENTION_HOURS}h.`,
+  alternates: { canonical: '/mail' },
 };
 
 export default function MailPage() {
   return (
     <div className="zm-container mail-page">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'Zumasia Mail',
+          url: `${SITE_URL}/mail`,
+          applicationCategory: 'UtilitiesApplication',
+          operatingSystem: 'Any',
+          description: `Free public temp mail and disposable email inboxes at *@${MAIL_DOMAIN} for QA verification and developer email testing.`,
+          offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' },
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: 'How to use Zumasia temp mail',
+          step: [
+            { '@type': 'HowToStep', name: 'Pick an address', text: `Pick any address: anything@${MAIL_DOMAIN}.` },
+            { '@type': 'HowToStep', name: 'Use it for testing', text: 'Use it for email workflow testing, QA verification, or a one-time developer check.' },
+            { '@type': 'HowToStep', name: 'Open the inbox', text: 'Open the inbox here; it refreshes automatically.' },
+            { '@type': 'HowToStep', name: 'Auto-purge', text: `Messages disappear after ${RETENTION_HOURS} hours.` },
+          ],
+        }}
+      />
       <section className="mail-shell">
         <div className="mail-shell__copy">
           <img src="/character.png" alt="Zumasia character leaning" className="hero-character" />
@@ -55,6 +82,10 @@ export default function MailPage() {
             <li>Open the inbox here; it refreshes automatically.</li>
             <li>Messages disappear after {RETENTION_HOURS} hours.</li>
           </ol>
+          <p className="mail-page__cross-link">
+            Need to move a file between devices? Try{' '}
+            <a href="/clipboard">Clipboard — share text, images, and files</a> with a one-time code.
+          </p>
         </section>
       </div>
     </div>

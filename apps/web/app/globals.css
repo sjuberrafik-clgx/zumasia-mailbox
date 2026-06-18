@@ -714,6 +714,19 @@ code {
     margin-top: 6px;
 }
 
+.mail-page__cross-link {
+    margin: var(--zm-space-md) 0 0;
+    color: var(--zm-text-soft);
+    font-size: var(--zm-type-body-sm-size);
+    line-height: var(--zm-type-body-lg-line);
+}
+
+.mail-page__cross-link a {
+    color: var(--zm-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .lookup-form {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;

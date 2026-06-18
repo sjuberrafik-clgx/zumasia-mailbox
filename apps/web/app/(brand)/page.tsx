@@ -33,7 +33,7 @@ export default function HomePage() {
           <img src="/character.png" alt="Zumasia character leaning" className="hero-character" />
           <p className="hero__eyebrow">Email workflow testing</p>
           <h1>Email workflow testing for QA teams and developers.</h1>
-          <p>{BRAND_TAGLINE} Start with Mail to validate signups, transactional emails, and one-off test flows in seconds.</p>
+          <p>{BRAND_TAGLINE} Start with Mail — free temp mail and disposable email inboxes to validate signups, transactional emails, and one-off test flows in seconds.</p>
           <div className="home-shell__meta" aria-label="Product qualities">
             <span>QA friendly</span>
             <span>Developer ready</span>

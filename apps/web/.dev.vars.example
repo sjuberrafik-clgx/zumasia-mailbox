@@ -1,0 +1,17 @@
+# Local dev secrets for the Zumasia web app.
+# Copy this file to `.dev.vars` (gitignored) and fill in values for local `next dev`.
+
+# Admin token guarding the /api/v1/admin/* token-request review endpoints.
+ADMIN_API_TOKEN=replace-with-a-strong-random-value
+
+# Pepper used to hash API tokens + claim codes. Falls back to a dev default if unset.
+API_TOKEN_PEPPER=replace-with-a-strong-random-value
+
+# Cloudflare Turnstile secret. Leave empty to disable bot-check on the token request form.
+TURNSTILE_SECRET=
+
+# Admin email notifications for new token requests (free tier: https://resend.com).
+# All three must be set to enable email; otherwise notifications are skipped.
+RESEND_API_KEY=
+ADMIN_NOTIFY_TO=you@example.com
+NOTIFY_FROM=Zumasia <notifications@zumasia.com>

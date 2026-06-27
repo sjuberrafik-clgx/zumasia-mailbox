@@ -43,3 +43,6 @@ coverage
 
 # d1 local data
 .wrangler/state
+
+# playwright mcp artifacts
+.playwright-mcp/

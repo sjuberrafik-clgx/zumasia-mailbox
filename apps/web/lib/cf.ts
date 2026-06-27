@@ -7,6 +7,12 @@ export type Bindings = {
   CLIP_DB: D1Database;
   CLIP_BUCKET: R2Bucket;
   CLIP_CODE_PEPPER?: string;
+  API_TOKEN_PEPPER?: string;
+  ADMIN_API_TOKEN?: string;
+  TURNSTILE_SECRET?: string;
+  RESEND_API_KEY?: string;
+  ADMIN_NOTIFY_TO?: string;
+  NOTIFY_FROM?: string;
 };
 
 export function bindings(): Bindings {
@@ -19,6 +25,19 @@ export function getClientIp(req: Request): string {
     req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
     'unknown'
   );
+}
+
+/**
+ * Run a promise in the background without blocking the response. Uses the
+ * Cloudflare execution context's waitUntil when available (production), and
+ * otherwise lets the promise run best-effort (local dev / build).
+ */
+export function waitUntil(promise: Promise<unknown>): void {
+  try {
+    getCloudflareContext().ctx.waitUntil(promise);
+  } catch {
+    void promise;
+  }
 }
 
 export type Geo = {

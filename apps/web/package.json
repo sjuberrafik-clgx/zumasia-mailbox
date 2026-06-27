@@ -10,7 +10,8 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && node scripts/patch-open-next.mjs && opennextjs-cloudflare deploy",
     "typecheck": "tsc --noEmit",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mint:token": "node scripts/mint-api-token.mjs"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.19.11",
